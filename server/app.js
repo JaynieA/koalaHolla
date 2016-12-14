@@ -40,24 +40,32 @@ app.get( '/getKoalas', function( req, res ){
       query.on ('end', function(){
         done();
         console.log(allKoalas);
-
+        //send a response
+        res.send(allKoalas);
       }); // end end
     }  // end else
   }); // end db connect
 
-  //send a response
-  res.send(allKoalas);
+
 });
 
 // add koala
 app.post( '/addKoala', urlencodedParser, function( req, res ){
   console.log( 'addKoala route hit' );
-  //assemble object to send
-  var objectToSend={
-    response: 'from addKoala route'
-  }; //end objectToSend
-  //send info back to client
-  res.send( objectToSend );
+  console.log(req.body);
+  pg.connect( connectionString, function(err, client, done){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('connected to db');
+      client.query( 'INSERT INTO koalas (name, sex, age, ready_for_transfer, notes) VALUES ( $1, $2, $3, $4, $5)', [ req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes]);
+      done();
+      res.send( 'koala noise' );
+    } // end if/else
+  }); // end connect
+
+
+
 });
 
 // add koala
