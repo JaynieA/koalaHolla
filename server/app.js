@@ -63,10 +63,23 @@ app.post( '/addKoala', urlencodedParser, function( req, res ){
       res.send( 'koala noise' );
     } // end if/else
   }); // end connect
+}); // end addKoala
 
-
-
-});
+// edit koala
+app.post( '/editKoala', urlencodedParser, function( req, res ){
+  console.log( 'editKoala route hit' );
+  console.log(req.body);
+  pg.connect( connectionString, function(err, client, done){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('connected to db');
+      client.query( 'UPDATE koalas SET name=$1, sex=$2 age=$3, ready_for_transfer=$4, notes=$5 WHERE id=$6', [req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes, req.body.id  ]);
+      done();
+      res.send( 'koala edited' );
+    } // end if/else
+  }); // end connect
+}); // end editKoala
 
 // add koala
 app.post( '/editKoala', urlencodedParser, function( req, res ){
