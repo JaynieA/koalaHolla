@@ -1,12 +1,12 @@
 console.log( 'js' );
 
-$( document ).ready( function(){
+$(document).ready(function(){
   console.log( 'JQ' );
   // load existing koalas on page load
   getKoalas();
 
   // add koala button click
-  $( '#addButton' ).on( 'click', function(){
+  $('#addButton').on('click', function(){
     console.log( 'in addButton on click' );
     // get user input and put in an object
     // NOT WORKING YET :(
@@ -23,7 +23,7 @@ $( document ).ready( function(){
   }); //end addButton on click
 
   //edit koala button click
-  $( '#editButton').on( 'click', function() {
+  $('#editButton').on('click', function() {
     console.log('editButton clicked');
     // create object to edit
     var objectToEdit = {
@@ -35,35 +35,50 @@ $( document ).ready( function(){
       notes: $('#notesEditIn').val(),
     };
     console.log(objectToEdit);
+    editKoala(objectToEdit);
   }); // end editButton
 }); // end doc ready
 
-var editKoalas = function() {
-  console.log('in editKoalas');
+var editKoala = function(koalaToEdit) {
+  console.log('in editKoala');
   $.ajax({
-    url: '/editKoalas',
+    url: '/editKoala',
     type: 'post',
     data: koalaToEdit,
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
+    success: function(data){
+      console.log( 'edited a koala! response:', data);
       generateDOM(data);
     } // end success
   });
 }; // end editKoalas
 
 var getKoalas = function(){
-  console.log( 'in getKoalas' );
+  console.log('in getKoalas');
   // ajax call to server to get koalas
   $.ajax({
     url: '/getKoalas',
     type: 'GET',
     success: function( data ){
-      console.log( 'got some koalas: ', data );
+      console.log('got some koalas: ', data);
       generateDOM(data);
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
 }; // end getKoalas
+
+var saveKoala = function(newKoala){
+  console.log('in saveKoala', newKoala);
+  // ajax call to server to add koala
+  $.ajax({
+    url: '/addKoala',
+    type: 'post',
+    data: newKoala,
+    success: function(data){
+      console.log('got some koalas: ', data);
+      generateDOM(data);
+    } // end success
+  }); //end ajax
+};
 
 var generateDOM = function(array) {
   $('#koalaEditSelect').html('');
@@ -77,16 +92,3 @@ var generateDOM = function(array) {
   $('#koalaEditSelect').html(koalaOptionsText);
   $('#allKoalasTable').html(koalaTableRowsText);
 }; // end generateDOM
-
-var saveKoala = function( newKoala ){
-  console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
-  $.ajax({
-    url: '/addKoala',
-    type: 'post',
-    data: newKoala,
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
-    } // end success
-  }); //end ajax
-};

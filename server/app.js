@@ -58,9 +58,21 @@ app.post( '/addKoala', urlencodedParser, function( req, res ){
       console.log(err);
     } else {
       console.log('connected to db');
-      client.query( 'INSERT INTO koalas (name, sex, age, ready_for_transfer, notes) VALUES ( $1, $2, $3, $4, $5)', [ req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes]);
-      done();
-      res.send( 'koala noise' );
+      client.query('INSERT INTO koalas (name, sex, age, ready_for_transfer, notes) VALUES ( $1, $2, $3, $4, $5)', [ req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes]);
+// COPIED FROM getKoalas
+      var query = client.query('SELECT * FROM koalas');
+      var allKoalas = [];
+      query.on( 'row' , function(row) {
+        allKoalas.push(row);
+      }); // end query 'row'
+      query.on ('end', function(){
+        done();
+        console.log(allKoalas);
+        //send a response
+        res.send(allKoalas);
+//      done();
+//      res.send( 'koala noise' );
+      }); // end query 'end'
     } // end if/else
   }); // end connect
 }); // end addKoala
@@ -74,20 +86,19 @@ app.post( '/editKoala', urlencodedParser, function( req, res ){
       console.log(err);
     } else {
       console.log('connected to db');
-      client.query( 'UPDATE koalas SET name=$1, sex=$2 age=$3, ready_for_transfer=$4, notes=$5 WHERE id=$6', [req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes, req.body.id  ]);
-      done();
-      res.send( 'koala edited' );
+      client.query('UPDATE koalas SET name=$1, sex=$2, age=$3, ready_for_transfer=$4, notes=$5 WHERE id=$6', [req.body.name, req.body.sex, req.body.age, req.body.ready_for_transfer, req.body.notes, req.body.id]);
+      // COPIED FROM getKoalas
+      var query = client.query('SELECT * FROM koalas');
+      var allKoalas = [];
+      query.on( 'row' , function(row) {
+        allKoalas.push(row);
+      }); // end query 'row'
+      query.on ('end', function(){
+        done();
+        console.log(allKoalas);
+        //send a response
+        res.send(allKoalas);
+      }); // end query 'end'
     } // end if/else
   }); // end connect
 }); // end editKoala
-
-// add koala
-app.post( '/editKoala', urlencodedParser, function( req, res ){
-  console.log( 'editKoala route hit' );
-  //assemble object to send
-  var objectToSend={
-    response: 'from editKoala route'
-  }; //end objectToSend
-  //send info back to client
-  res.send( objectToSend );
-});
