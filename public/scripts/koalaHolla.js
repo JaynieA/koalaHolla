@@ -37,6 +37,18 @@ $(document).ready(function(){
     console.log(objectToEdit);
     editKoala(objectToEdit);
   }); // end editButton
+
+  $(document).on('click', '.edit-koala-btn', function() {
+    console.log('new edit koala clicked');
+    var editableFields = $(this).closest('tr').find('.editable').html('this one');
+    editableFields.html('<input type="text" class="form-control">');
+    //transform button to be a save button
+    $(this).text('Save');
+    $(this).removeClass('btn-primary');
+    $(this).addClass('btn-danger');
+    //$(this);
+  });
+
 }); // end doc ready
 
 var editKoala = function(koalaToEdit) {
@@ -89,11 +101,11 @@ var generateDOM = function(array) {
   for (var i = 0; i < array.length; i++) {
     koalaOptionsText += '<option value="' + array[i].id + '">' + array[i].id + ', ' + array[i].name + '</option>';
     koalaTableRowsText += '<tr><td>' + array[i].id + '</td>';
-    koalaTableRowsText += '<td>' + array[i].name + '</td>';
-    koalaTableRowsText +=  '<td>' + array[i].sex + '</td>';
-    koalaTableRowsText += '<td>' + array[i].age + '</td>';
-    koalaTableRowsText += '<td>' + array[i].ready_for_transfer + '</td>';
-    koalaTableRowsText += '<td>' + array[i].notes + '</td>';
+    koalaTableRowsText += '<td class="editable">' + array[i].name + '</td>';
+    koalaTableRowsText +=  '<td class="editable">' + array[i].sex + '</td>';
+    koalaTableRowsText += '<td class="editable">' + array[i].age + '</td>';
+    koalaTableRowsText += '<td class="editable">' + array[i].ready_for_transfer + '</td>';
+    koalaTableRowsText += '<td class="editable">' + array[i].notes + '</td>';
     koalaTableRowsText += '<td><button class="btn btn-primary btn-sm edit-koala-btn">Edit</button></td></tr>';
   } // end for
   $('#koalaEditSelect').html(koalaOptionsText);
