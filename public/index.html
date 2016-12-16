@@ -5,22 +5,46 @@
     <title>Koalla Holla</title>
     <script src="vendors/jquery-3.0.0.min.js" charset="utf-8"></script>
     <script src="scripts/koalaHolla.js" charset="utf-8"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
-    <img src='images/icon.png' />
+    <img src="images/icon.png" />
     <h1>Koalla Holla</h1>
     <h2>1976 Llama Comma Drive</h2>
     <h2>Walla Walla, WA</h2>
-    <div id='addKoala'>
-      <h2>Add Koala</h2>
-      <input type="text" id="nameIn" value="" placeholder="Name">
-      <input type="text" id="ageIn" value="" placeholder="Age">
-      <input type="text" id="sexIn" value="" placeholder="Sex">
-      <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
-      <input type="text" id="notesIn" value="" placeholder="Notes">
-      <button type="button" id="addButton">Add Koala</button>
+    <div id="addKoala">
+      <h2 class="text-center">Add Koala</h2>
+      <form class="form-inline text-center">
+        <div class="form-group">
+          <label for="nameIn">Name:</label>
+          <input type="text" id="nameIn" placeholder="Name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="ageIn">Age:</label>
+          <input type="text" id="ageIn" placeholder="Age" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="sexIn">Sex:</label>
+          <input type="text" id="sexIn"placeholder="Sex" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="readyForTransferEditIn">Reay For Transfer?</label>
+          <input type="text" id="readyForTransferIn" placeholder="TRUE/FALSE" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="notesIn">Notes:</label>
+          <input type="text" id="notesIn" placeholder="Notes" class="form-control">
+        </div>
+        <button type="button" id="addButton" class="btn btn-primary">Add Koala</button>
+      </form>
+
     </div>
-    <div id='editKoala'>
+    <div id="editKoala">
       <h2>Edit Koala</h2>
       <select id="koalaEditSelect"></select>
       <input type="text" id="nameEditIn" value="" placeholder="Name">
@@ -32,7 +56,20 @@
     </div>
     <div>
       <h2>All Koalas</h2>
-      <table id="allKoalasTable"></table>
+      <table id="allKoalasTable" class="table text-center table-striped">
+        <thead class="header-inverse">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Sex</th>
+            <th class="text-center">Age</th>
+            <th class="text-center">Ready for Transfer</th>
+            <th class="text-center">Notes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="allKoalasTableBody"></tbody>
+      </table>
     </div>
   </body>
 </html>
