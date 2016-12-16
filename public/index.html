@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style/style.css">
   </head>
   <body>
-    <img src="images/icon.png" />
+    <img class="logo" src="images/icon.png" />
     <h1>Koalla Holla</h1>
-    <h2>1976 Llama Comma Drive</h2>
-    <h2>Walla Walla, WA</h2>
+    <h3>1976 Llama Comma Drive</h3>
+    <h3>Walla Walla, WA</h3>
+    <hr>
     <div id="addKoala">
       <h2 class="text-center">Add Koala</h2>
       <form class="form-inline text-center">
@@ -30,7 +32,7 @@
         </div>
         <div class="form-group">
           <label for="sexIn">Sex:</label>
-          <input type="text" id="sexIn"placeholder="Sex" class="form-control">
+          <input type="text" id="sexIn" placeholder="Sex" class="form-control">
         </div>
         <div class="form-group">
           <label for="readyForTransferEditIn">Reay For Transfer?</label>
@@ -44,7 +46,7 @@
       </form>
 
     </div>
-    <div id="editKoala">
+    <!-- <div id="editKoala">
       <h2>Edit Koala</h2>
       <select id="koalaEditSelect"></select>
       <input type="text" id="nameEditIn" value="" placeholder="Name">
@@ -53,7 +55,8 @@
       <input type="text" id="readyForTransferEditIn" value="" placeholder="Transfer">
       <input type="text" id="notesEditIn" value="" placeholder="Notes">
       <button type="button" id="editButton">Edit Koala</button>
-    </div>
+    </div> -->
+    <hr>
     <div>
       <h2>All Koalas</h2>
       <table id="allKoalasTable" class="table text-center table-striped">
